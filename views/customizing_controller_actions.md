@@ -30,3 +30,21 @@ class Admin::FoosController < Admin::ApplicationController
   # end
 end
 ```
+
+## Custom admin home page
+
+You can customize your routes file to change the generated admin root:
+
+```ruby
+namespace :admin do
+  DashboardManifest::DASHBOARDS.each do |dashboard_resource|
+    resources dashboard_resource
+  end
+
+  root controller: :welcome, action: :index
+end
+```
+
+Then you can create an `Admin::WelcomeController` in
+`app/controllers/admin` with an `index` action to serve up your custom
+homepage and a view in `app/views/admin/welcome/index.html.erb`.
